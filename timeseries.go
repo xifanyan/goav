@@ -29,15 +29,16 @@ type TimeSeries struct {
 }
 
 // NewTimeSeries : constructor for timeseries
-func NewTimeSeries(db *Database, req *Request) (*TimeSeries, error) {
+func NewTimeSeries(database *Database, req *Request) (*TimeSeries, error) {
 	return &TimeSeries{
 		Req:      req,
-		Database: db,
+		Database: database,
 	}, nil
 }
 
 // Save : save timeseires to database
 func (ts *TimeSeries) Save() error {
+	var err error
 	url := ts.Req.GetURL()
 
 	resp, err := http.Get(url)
@@ -59,13 +60,11 @@ func (ts *TimeSeries) Save() error {
 	}
 
 	for row := range c {
-		quote := &Quote{}
 		q := row.(Quote)
 		q.Function = uint8(ts.Req.function)
 		q.Symbol = ts.Req.symbol
-		//ts.Database.DB.Create(q)
-		//ts.Database.DB.Debug().FirstOrCreate(&quote, q)
-		ts.Database.DB.Where(Quote{TimeStamp: q.TimeStamp, Function: q.Function, Symbol: q.Symbol}).Attrs(q).FirstOrCreate(&quote)
+		// If found then Update else Create
+		ts.Database.db.Where(Quote{TimeStamp: q.TimeStamp, Function: q.Function, Symbol: q.Symbol}).Attrs(q).FirstOrCreate(&Quote{})
 	}
 
 	return err
