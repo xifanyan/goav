@@ -6,8 +6,7 @@ import (
 
 func main() {
 	cfg := goav.DbConfig{
-		Dialect: "sqlite3",
-		// ConnectionStr: ":memory:",
+		Dialect:       "sqlite3",
 		ConnectionStr: "./testdata/test.db",
 	}
 
@@ -16,7 +15,7 @@ func main() {
 	database.Init(&goav.Quote{})
 
 	ts := goav.TimeSeries{
-		Req:      goav.NewRequest(goav.TimeSeriesDailyAdjusted, "GDX", goav.IntervalNA, goav.FULL, goav.CSV, "60LA8W7JK9QYJEJN"),
+		Req:      goav.NewRequest(goav.TimeSeriesDailyAdjusted, "GOOG", goav.IntervalNA, goav.FULL, goav.CSV, "demo"),
 		Database: database,
 	}
 
