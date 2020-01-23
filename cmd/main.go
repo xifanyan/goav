@@ -10,15 +10,11 @@ func main() {
 		ConnectionStr: "./testdata/test.db",
 	}
 
+	req := goav.NewStockRequest(goav.TimeSeriesDailyAdjusted, "GOOG", goav.IntervalNA, goav.FULL, goav.CSV, "demo")
+
 	database, _ := goav.NewDatabase(cfg)
+	database.Init()
 
-	database.Init(&goav.Quote{})
-
-	ts := goav.TimeSeries{
-		Req:      goav.NewRequest(goav.TimeSeriesDailyAdjusted, "GOOG", goav.IntervalNA, goav.FULL, goav.CSV, "demo"),
-		Database: database,
-	}
-
-	_ = ts.Save()
-
+	_ = goav.NewTimeSeries(req, database)
+	//
 }

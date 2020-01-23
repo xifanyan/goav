@@ -9,6 +9,7 @@ const (
 type Function uint8
 
 const (
+	// Stock Time Series
 	TimeSeriesDaily Function = iota
 	TimeSeriesDailyAdjusted
 	TimeSeriesWeekly
@@ -16,6 +17,9 @@ const (
 	TimeSeriesMonthly
 	TimeSeriesMonthlyAdjusted
 	TimeSeriesIntraday
+	// Technical Indiator
+	EMA
+	SMA
 )
 
 func (f Function) String() string {
@@ -27,6 +31,8 @@ func (f Function) String() string {
 		"TIME_SERIES_MONTHLY",
 		"TIME_SERIES_MONTHLY_ADJUSTED",
 		"TIME_SERIES_INTRADAY",
+		"EMA",
+		"SMA",
 	}[f]
 }
 
@@ -42,7 +48,6 @@ const (
 	IntervalDaily
 	IntervalWeekly
 	IntervalMonthly
-	IntervalNA
 )
 
 func (v Interval) String() string {
@@ -52,9 +57,9 @@ func (v Interval) String() string {
 		"15min",
 		"30min",
 		"60min",
-		"1day",
-		"1mon",
-		"na",
+		"daily",
+		"weekly",
+		"monthly",
 	}[v]
 }
 

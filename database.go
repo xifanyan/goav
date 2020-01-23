@@ -1,7 +1,6 @@
 package goav
 
 import (
-	"github.com/golang/glog"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
@@ -26,15 +25,13 @@ func NewDatabase(cfg DbConfig) (*Database, error) {
 		return nil, err
 	}
 
+	database.db.LogMode(true)
+
 	return &database, nil
 }
 
-func (database *Database) Init(v interface{}) {
+func (database *Database) Init() {
 
-	database.db.AutoMigrate(v)
-
-	if !database.db.HasTable(v) {
-		glog.Fatal("Failed to initialize Table")
-	}
+	database.db.AutoMigrate(&StockRequest{})
 
 }
