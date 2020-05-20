@@ -2,6 +2,7 @@ package goav
 
 import (
 	"github.com/jinzhu/gorm"
+	// sqlite ...
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 

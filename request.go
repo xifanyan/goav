@@ -26,7 +26,7 @@ type StockRequest struct {
 }
 
 // NewStockRequest ...
-func NewStockRequest(function Function, symbol string, interval Interval, outputSize OutputSize,
+func NewStockRequest(function TimeSeriesFunction, symbol string, interval Interval, outputSize OutputSize,
 	dataType DataType, apiKey string) *StockRequest {
 	return &StockRequest{
 		Function:   fmt.Sprint(function),

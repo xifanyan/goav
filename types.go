@@ -5,12 +5,12 @@ const (
 	ALPHAVANTAGE = "https://www.alphavantage.co"
 )
 
-// Function ...
-type Function uint8
+// TimeSeriesFunction ...
+type TimeSeriesFunction uint8
 
 const (
 	// TimeSeriesDaily ...
-	TimeSeriesDaily Function = iota
+	TimeSeriesDaily TimeSeriesFunction = iota
 	// TimeSeriesDailyAdjusted ...
 	TimeSeriesDailyAdjusted
 	// TimeSeriesWeekly ...
@@ -25,7 +25,7 @@ const (
 	TimeSeriesIntraday
 )
 
-func (f Function) String() string {
+func (f TimeSeriesFunction) String() string {
 	return [...]string{
 		"TIME_SERIES_DAILY",
 		"TIME_SERIES_DAILY_ADJUSTED",
