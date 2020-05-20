@@ -10,11 +10,22 @@ func main() {
 		ConnectionStr: "./testdata/test.db",
 	}
 
-	req := goav.NewStockRequest(goav.TimeSeriesDailyAdjusted, "GOOG", goav.IntervalNA, goav.FULL, goav.CSV, "demo")
+	db, _ := goav.NewDatabase(cfg)
+	db.Init()
 
-	database, _ := goav.NewDatabase(cfg)
-	database.Init()
+	req1 := goav.NewStockRequest(goav.TimeSeriesDailyAdjusted, "GDX", goav.NA, goav.FULL, goav.CSV, "61LA8W7JK9QYJEJN")
+	ts1 := goav.NewStockTimeSeries(req1, db)
+	ts1.Save()
 
-	_ = goav.NewTimeSeries(req, database)
-	//
+	req2 := goav.NewStockRequest(goav.TimeSeriesDailyAdjusted, "GLD", goav.NA, goav.FULL, goav.CSV, "61LA8W7JK9QYJEJN")
+	ts2 := goav.NewStockTimeSeries(req2, db)
+	ts2.Save()
+
+	req3 := goav.NewStockRequest(goav.TimeSeriesDailyAdjusted, "SILJ", goav.NA, goav.FULL, goav.CSV, "61LA8W7JK9QYJEJN")
+	ts3 := goav.NewStockTimeSeries(req3, db)
+	ts3.Save()
+
+	req4 := goav.NewStockRequest(goav.TimeSeriesDailyAdjusted, "SLV", goav.NA, goav.FULL, goav.CSV, "61LA8W7JK9QYJEJN")
+	ts4 := goav.NewStockTimeSeries(req4, db)
+	ts4.Save()
 }

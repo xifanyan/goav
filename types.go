@@ -40,18 +40,20 @@ func (f Function) String() string {
 type Interval uint8
 
 const (
-	IntervalOneMinute Interval = iota
-	IntervalFiveMinute
-	IntervalFifteenMinute
-	IntervalThirtyMinute
-	IntervalSixtyMinute
-	IntervalDaily
-	IntervalWeekly
-	IntervalMonthly
+	NA Interval = iota
+	OneMinute
+	FiveMinute
+	FifteenMinute
+	ThirtyMinute
+	SixtyMinute
+	Daily
+	Weekly
+	Monthly
 )
 
 func (v Interval) String() string {
 	return [...]string{
+		"na",
 		"1min",
 		"5min",
 		"15min",

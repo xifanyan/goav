@@ -1,0 +1,11 @@
+{
+    "ApiKey": 
+    "DB": {
+	"driver": "sqlite",
+	"connection_string": "../testdata/test.db"
+    },
+    "Stocks": [
+	{"symbol": "GLD"},
+	{"symbol": "GDX"}
+    ]
+}

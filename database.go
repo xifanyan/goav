@@ -12,26 +12,24 @@ type DbConfig struct {
 
 type Database struct {
 	DbConfig
-	db *gorm.DB
+	inst *gorm.DB
 }
 
 func NewDatabase(cfg DbConfig) (*Database, error) {
 	var err error
 
-	database := Database{}
-	database.DbConfig = cfg
+	db := Database{}
+	db.DbConfig = cfg
 
-	if database.db, err = gorm.Open(cfg.Dialect, cfg.ConnectionStr); err != nil {
+	if db.inst, err = gorm.Open(cfg.Dialect, cfg.ConnectionStr); err != nil {
 		return nil, err
 	}
 
-	database.db.LogMode(true)
-
-	return &database, nil
+	// db.inst.LogMode(true)
+	return &db, nil
 }
 
-func (database *Database) Init() {
-
-	database.db.AutoMigrate(&StockRequest{})
-
+func (db *Database) Init() {
+	tbls := []interface{}{&StockRequest{}, &StockTimeSeries{}}
+	db.inst.AutoMigrate(tbls...)
 }
