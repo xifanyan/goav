@@ -5,16 +5,19 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
+// DbConfig ...
 type DbConfig struct {
 	Dialect       string
 	ConnectionStr string
 }
 
+// Database ...
 type Database struct {
 	DbConfig
 	inst *gorm.DB
 }
 
+// NewDatabase ...
 func NewDatabase(cfg DbConfig) (*Database, error) {
 	var err error
 
@@ -29,6 +32,7 @@ func NewDatabase(cfg DbConfig) (*Database, error) {
 	return &db, nil
 }
 
+// Init ...
 func (db *Database) Init() {
 	tbls := []interface{}{&StockRequest{}, &StockTimeSeries{}}
 	db.inst.AutoMigrate(tbls...)

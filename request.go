@@ -13,6 +13,7 @@ type requestor interface {
 	read() (io.ReadCloser, error)
 }
 
+// StockRequest ...
 type StockRequest struct {
 	gorm.Model
 	Function        string     `gorm:"unique_index:idx_func_symb_intv"`
@@ -20,10 +21,11 @@ type StockRequest struct {
 	Interval        string     `gorm:"unique_index:idx_func_symb_intv"`
 	OutputSize      OutputSize `gorm:"-"`
 	DataType        DataType   `gorm:"-"`
-	ApiKey          string     `gorm:"-"`
+	APIKey          string     `gorm:"-"`
 	StockTimeSeries []StockTimeSeries
 }
 
+// NewStockRequest ...
 func NewStockRequest(function Function, symbol string, interval Interval, outputSize OutputSize,
 	dataType DataType, apiKey string) *StockRequest {
 	return &StockRequest{
@@ -32,20 +34,15 @@ func NewStockRequest(function Function, symbol string, interval Interval, output
 		Interval:   fmt.Sprint(interval),
 		OutputSize: outputSize,
 		DataType:   dataType,
-		ApiKey:     apiKey,
+		APIKey:     apiKey,
 	}
 }
-
-// func (req *StockRequest) BeforeCreate(scope *gorm.Scope) error {
-//	scope.SetColumn("Interval", "WTF")
-//	return nil
-// }
 
 func (req *StockRequest) getURL() string {
 	var q []string
 
 	q = append(q, fmt.Sprintf("function=%s", req.Function))
-	q = append(q, fmt.Sprintf("apikey=%s", req.ApiKey))
+	q = append(q, fmt.Sprintf("apikey=%s", req.APIKey))
 	q = append(q, fmt.Sprintf("symbol=%s", req.Symbol))
 	q = append(q, fmt.Sprintf("datatype=%s", req.DataType))
 

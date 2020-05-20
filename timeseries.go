@@ -7,6 +7,7 @@ import (
 	"github.com/xifanyan/csvstream"
 )
 
+// StockTimeSeries ...
 type StockTimeSeries struct {
 	gorm.Model
 	req              *StockRequest `gorm:"-"`
@@ -23,6 +24,7 @@ type StockTimeSeries struct {
 	SplitCoefficient float64       `csv:"split_coefficient"`
 }
 
+// NewStockTimeSeries ...
 func NewStockTimeSeries(req *StockRequest, db *Database) *StockTimeSeries {
 	return &StockTimeSeries{
 		req: req,
@@ -30,6 +32,7 @@ func NewStockTimeSeries(req *StockRequest, db *Database) *StockTimeSeries {
 	}
 }
 
+// Save ...
 func (sts *StockTimeSeries) Save() error {
 	var err error
 

@@ -9,17 +9,20 @@ const (
 type Function uint8
 
 const (
-	// Stock Time Series
+	// TimeSeriesDaily ...
 	TimeSeriesDaily Function = iota
+	// TimeSeriesDailyAdjusted ...
 	TimeSeriesDailyAdjusted
+	// TimeSeriesWeekly ...
 	TimeSeriesWeekly
+	// TimeSeriesWeeklyAdjusted ...
 	TimeSeriesWeeklyAdjusted
+	// TimeSeriesMonthly ...
 	TimeSeriesMonthly
+	// TimeSeriesMonthlyAdjusted ...
 	TimeSeriesMonthlyAdjusted
+	// TimeSeriesIntraday ...
 	TimeSeriesIntraday
-	// Technical Indiator
-	EMA
-	SMA
 )
 
 func (f Function) String() string {
@@ -40,14 +43,23 @@ func (f Function) String() string {
 type Interval uint8
 
 const (
+	// NA ...
 	NA Interval = iota
+	// OneMinute ...
 	OneMinute
+	// FiveMinute ...
 	FiveMinute
+	// FifteenMinute ...
 	FifteenMinute
+	// ThirtyMinute ...
 	ThirtyMinute
+	// SixtyMinute ...
 	SixtyMinute
+	// Daily ...
 	Daily
+	// Weekly ...
 	Weekly
+	// Monthly ...
 	Monthly
 )
 
@@ -69,7 +81,9 @@ func (v Interval) String() string {
 type DataType uint8
 
 const (
+	// CSV ...
 	CSV DataType = iota
+	// JSON ...
 	JSON
 )
 
@@ -84,7 +98,9 @@ func (dtype DataType) String() string {
 type OutputSize uint8
 
 const (
+	// COMPACT ...
 	COMPACT OutputSize = iota
+	// FULL ...
 	FULL
 )
 
